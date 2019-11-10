@@ -53,6 +53,9 @@
 #ifndef HIDIOCGFEATURE
 #define HIDIOCGFEATURE(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x07, len)
 #endif
+#ifndef HIDIOCGRAWPHYS
+#define HIDIOCGRAWPHYS(len)    _IOC(_IOC_READ, 'H', 0x05, len)
+#endif
 
 
 /* USB HID device property names */
@@ -756,6 +759,18 @@ int HID_API_EXPORT hid_get_feature_report(hid_device *dev, unsigned char *data, 
 	if (res < 0)
 		perror("ioctl (GFEATURE)");
 
+
+	return res;
+}
+
+
+int HID_API_EXPORT hid_get_physical_address(hid_device *dev, unsigned char *data, size_t length)
+{
+	int res;
+
+	res = ioctl(dev->device_handle, HIDIOCGRAWPHYS(length), data);
+	if (res < 0)
+		perror("ioctl (GFEATURE)");
 
 	return res;
 }

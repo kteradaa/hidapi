@@ -383,6 +383,13 @@ extern "C" {
 		*/
 		HID_API_EXPORT const wchar_t* HID_API_CALL hid_error(hid_device *device);
 
+		/** @brief Get The Physical Address String from a HID device.
+
+			@returns
+				This function returns 0 on success and -1 on error.
+		*/
+		int HID_API_EXPORT HID_API_CALL hid_get_physical_address(hid_device *device, unsigned char *data, size_t length);
+
 #ifdef __cplusplus
 }
 #endif
